@@ -36,7 +36,10 @@ export const goMoviesScraper = makeSourcerer({
       return { name, year, path };
     });
 
-    const targetMedia = mediaData.find((m) => m.name === ctx.media.title);
+    const targetMedia = mediaData.find(
+      (m) => m.name === ctx.media.title && m.year === ctx.media.releaseYear.toString(),
+    );
+    console.warn('Search on both name and year');
     if (!targetMedia?.path) throw new NotFoundError('Media not found');
 
     // Example movie path: /movie/watch-{slug}-{id}
